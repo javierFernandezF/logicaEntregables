@@ -130,8 +130,8 @@ Se detiene la iteración.
 --}
 
 --2.
-primer_divisor' :: N -> N
-primer_divisor' n = minimo_acotado es_divisor n 2 
+--primer_divisor' :: N -> N
+--primer_divisor' n = minimo_acotado es_divisor n 2 
 --VER ESTA PORONGA, HAY QUE REVISAR ESTO Y PARA ABAJO.
 
 --3.
@@ -148,7 +148,7 @@ minimo_p p n
 	| not (p n) = minimo_p p (n+1)
 
 {--
-Esta función termina si...
+Esta función termina si p n es verdadero, es decir, si el valor n cumple el predicado. Caso contrario, escala hasta el infinito.
 --}
 
 --------------
@@ -157,27 +157,45 @@ Esta función termina si...
 
 --1.
 cantidad_p :: (N -> Bool) -> N -> N -> N
-cantidad_p p m n = undefined
+cantidad_p p m n = 
+			| m > n = 0
+			| p m = 1 + cantidad_p p (m+1) n
+			| otherwise = cantidad_p p (m+1) n
 
 --2.
 suma_p :: (N -> Bool) -> N -> N -> N
-suma_p p m n = undefined
+suma_p p m n = 
+			| m > n = 0
+			| p m = m + suma_p p (m+1) n
+			| otherwise = suma_p p (m+1) n
 
 --3.
 suma2_p :: (N -> Bool) -> N -> N -> N
-suma2_p p m n = undefined
+suma2_p p m n = 
+			| m > n = 0
+			| p m = m*m + suma2_p p (m+1) n
+			| otherwise = suma2_p p (m+1) n
 
 --4.
 sumaf_p :: (N -> Bool) -> (N -> N) -> N -> N -> N
-sumaf_p p f m n = undefined
+sumaf_p p f m n = 
+			| m > n = 0
+			| p m = f m + sumaf_p p f (m+1) n
+			| otherwise = sumaf_p p f (m+1) n
 
 --5.
 todos_p :: (N -> Bool) -> N -> N -> Bool
-todos_p p m n = undefined
+todos_p p m n = 
+			| m > n = True
+			| not (p m) = False
+			| otherwise = todos_p p (m+1) n
 
---5.
+--6.
 existe_p :: (N -> Bool) -> N -> N -> Bool
-existe_p p m n = undefined
+existe_p p m n = 
+			| m > n = False
+			| p m = True
+			| otherwise = existe_p p (m+1) n
 
 -------
 --FIN--
